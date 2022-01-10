@@ -1,0 +1,8 @@
+*.png
+*.mat
+*.asv
+*.mexmaci64
+tmp/
+.DS_Store
+.idea/
+*nii*
