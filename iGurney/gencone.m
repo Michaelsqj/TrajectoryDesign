@@ -34,6 +34,7 @@ if (nargin<9)
 	OVERSAMPLE = 4;
 end
 if (nargin<10)
+    
 	DCF = 1.0;
 end
 if (nargin<11)
@@ -106,11 +107,11 @@ str = sprintf('wcc(%g,[%g %g],%g,%g,%g,%g,%g,[%g %g],[%g %g],%g,[%g %g]);\n',pi/
 
 
 
-% [g,k,len] = wcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD);
-rho_len = 1000;
-% rho = 1 - 0.3 * tanh(linspace(-1,1,rho_len));
-rho = ones(1000,1); 
-[g,k,len] = vdwcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD, rho, rho_len);
+[g,k,len] = wcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD);
+% rho_len = 1000;
+% % rho = 1 - 0.3 * tanh(linspace(-1,1,rho_len));
+% rho = ones(1000,1); 
+% [g,k,len] = vdwcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD, rho, rho_len);
 
 
 

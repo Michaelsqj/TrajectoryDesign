@@ -5,7 +5,7 @@ function [time, g, k] = gen_base_cone(mat, fov, Ts, gmax, smax, readout_time, co
     % Inputs:
     %   mat = resolution
     %   fov    = field of view in [mm]
-    %   smax   = G/cm/msad
+    %   smax   = G/cm/ms
     %   gmax =   G/cm
     %   readout_time = time for readout in ms
     %   cone_angle = angle at edge of k-space in degrees

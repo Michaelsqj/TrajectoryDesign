@@ -45,7 +45,7 @@ function [optTime, optgA, optkA, optp, optA, optArclength, undersample] = base_c
                 kmax_rad = kmax * cos(cone_angle / 180 * pi);
                 k(:, 3) = t * kmax_rad;
 
-                kTr = t.^2 * kmax * sin(cone_angle / 180 * pi);
+                kTr = t.^3 * kmax * sin(cone_angle / 180 * pi);
                 phi = 2 * pi * fact * t.^p(p_pos);
                 k(:, 1) = cos(phi) .* kTr;
                 k(:, 2) = sin(phi) .* kTr;
@@ -120,7 +120,7 @@ function [cost, arc_length] = costfn2(kA)
     kR(:, 3) = interp1(k_r, kA(:, 3), rr, 'linear');
     arc_length = sqrt(sum(diff(kR).^2, 2));
 
-    A = rr(1:end - 1).^2; % A is sum kr.^2 in the eq[3]
+    A = rr(1:end - 1).^3; % A is sum kr.^2 in the eq[3]
     A = A .* gen_weights(length(A));
     b = linsolve(A, arc_length); % b is the 'S' in the paper, scalar
     f = A * b;

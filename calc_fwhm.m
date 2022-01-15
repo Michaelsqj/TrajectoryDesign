@@ -30,9 +30,9 @@ function [fwhm] = subfunc(psfz)
     [X,Y] = meshgrid(1: dim(1), 1: dim(2));
     ptx = X(pthz); pty = Y(pthz);
     
-    figure;
-    surf(X, Y, psfz,'FaceAlpha',0.8);
-    hold on;
+%     figure;
+%     surf(X, Y, psfz,'FaceAlpha',0.8);
+%     hold on;
     
     
     
@@ -47,9 +47,9 @@ function [fwhm] = subfunc(psfz)
     ptsz = find( (precZ>(0.49*height)) & (precZ<(0.51*height)) );
     fwhm = 2 * sum(sqrt((precX(ptsz) - ptx).^2 + (precY(ptsz) - pty).^2)) / length(ptsz);
 %     figure;
-    surf(precX, precY, reshape(precZ, size(precX)),'FaceAlpha', 0.5);
-    hold on;
-    s = scatter3(precX(ptsz), precY(ptsz), precZ(ptsz),'r','Marker','x'); s.SizeData = 200;
+%     surf(precX, precY, reshape(precZ, size(precX)),'FaceAlpha', 0.5);
+%     hold on;
+%     s = scatter3(precX(ptsz), precY(ptsz), precZ(ptsz),'r','Marker','x'); s.SizeData = 200;
 %     
 %     
 %     ptsz = find( (psfz>(0.4*height)) & (psfz<(0.6*height)) );

@@ -33,29 +33,35 @@ function [time, g, k] = base_cone3(mat, fov, Ts, gmax, smax, readout_time, cone_
 %     k = k(1:len,:);
 %     time = len * Ts;
 
-%     theta         = [0+1e-5 pi/2-1e-5];
-    
     addpath('./iGurney');
-%     [g_range,k_range,nint_range,lenro] = findcone(res,fov,LEN,theta,0.1,Ts,1,smax,gmax,1, 0, [0,1], 1);
-    theta = cone_angle;
-    [g,k,nint,len] = findcone(res,fov,LEN,theta,0.01,Ts,1,smax,gmax,1, 0, [0,1], 0);
-%     [g_range, gr, nint_range] = findcone(res,fov,LEN,theta,0.1,Ts,0,1,smax,gmax);
-%     [g_range, gr, k_range, nint_range] = findcone(res, fov, LEN, theta, 0.1, Ts, 1, smax, gmax);
+    %---------------------------------
+%     theta = cone_angle;
+%     [g,k,nint,len] = findcone(res,fov,LEN,theta,0.01,Ts,1,smax,gmax,0, 0, [0,1], 0);
+%     time = length(g) * Ts;
+
+    %---------------------------------
+    theta         = [0+1e-5 pi/2-1e-5];
+    
+    DCF = 0;
+    [g_range,k_range,nint_range,lenro] = findcone(res,fov,LEN,theta,0.1,Ts,1,smax,gmax, DCF);
+
+    time = length(g_range) * Ts;
+    
+    theta_lower = min(theta);
+    theta_upper = max(theta);
+
+    nint = (pi*fov/res*cos(cone_angle)) ./ ...
+                     sqrt( 1+cos(cone_angle).^2 ./ cos(theta_lower)^2 * max(0, (pi*fov/res*cos(theta_lower)/nint_range)^2-1 ) );
+
+
+    g(:,1) = cos(cone_angle) / cos(theta_lower) * g_range(:,1);
+    g(:,2) = cos(cone_angle) / cos(theta_lower) * g_range(:,2);
+    g(:,3) = sin(cone_angle) / sin(theta_upper) * g_range(:,3);
+
+    % integrate the gradient with Ts to get the trajectory
+    k = cumsum(g * Ts * gamma, 1);
+
+    %---------------------------------
+
     rmpath('./iGurney');
-    
-    time = length(g) * Ts;
-    
-%     theta_lower = theta(1);
-%     theta_upper = theta(2);
-% 
-%     nint = (pi*fov/res*cos(cone_angle)) ./ ...
-%                      sqrt( 1+cos(cone_angle).^2 ./ cos(theta_lower)^2 * max(0, (pi*fov/res*cos(theta_lower)/nint_range)^2-1 ) );
-% 
-% 
-%     g(:,1) = cos(cone_angle) / cos(theta_lower) * g_range(:,1);
-%     g(:,2) = cos(cone_angle) / cos(theta_lower) * g_range(:,2);
-%     g(:,3) = sin(cone_angle) / sin(theta_upper) * g_range(:,3);
-% 
-%     % integrate the gradient with Ts to get the trajectory
-%     k = cumsum(g * Ts * gamma, 1);
 end

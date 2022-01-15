@@ -1,4 +1,4 @@
-function plot_baseK(base_k, base_g, kmax)
+function plot_baseK(base_k, base_g, kmax, gmax)
     % plot k-space trajectory, 1/3 region k-space trajectory, gradient waveform
     r = sqrt(sum(base_k.^2, 2));
     perfK_pts = find(r<(kmax/3) );
@@ -12,5 +12,6 @@ function plot_baseK(base_k, base_g, kmax)
     scatter(1:length(base_g), base_g(:,1)); hold on;
     scatter(1:length(base_g), base_g(:,2)); hold on;
     scatter(1:length(base_g), base_g(:,3)); 
+    ylim([-gmax,gmax]);
     legend('gx','gy','gz')
 end

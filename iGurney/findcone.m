@@ -57,10 +57,10 @@ MAXLEN = LEN+5;
 % Try a huge number of interleaves to make sure it's possible to generate
 % such a waveform.
 [g,k,lenro] = gencone(RES,FOV,1e8,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-[grd, krd, lenrd] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-g = [g; grd];
-k = [k; krd];
-lenro = lenro + lenrd;
+% [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+% g = [g; gr];
+% k = [k; kr];
+% lenro = lenro + lenr;
 if (length(g)>LEN)
 	disp('Sorry, but it is impossible to achieve that resolution in that length of time');
 	g = [];
@@ -70,9 +70,8 @@ if (length(g)>LEN)
 end
 
 [g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-[grd, krd, lenrd] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-g = [g; grd];
-k = [k; krd];
+% [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+% g = [g; gr];
 leng = length(g); 
 
 LENhi = leng;
@@ -83,11 +82,9 @@ while ((leng>LEN))
 	NINThi = NINThi*2;
 	curNINT = NINThi;
 	LENhi = leng;
-	[g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-	[grd, krd, lenrd] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-	g = [g; grd];
-	k = [k; krd];
-	lenro = lenro + lenrd;
+        [g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
+        [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+        g = [g; gr];
 	leng = length(g); 
 end
 
@@ -95,11 +92,9 @@ end
 % the requested precision.
 while ((((NINThi-NINTlo)>PRECISION) || (leng>LEN)) && (LENhi~=LEN))
 	curNINT = (NINThi-NINTlo)/2+NINTlo;
-	[g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-	[grd, krd, lenrd] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-	g = [g; grd];
-	k = [k; krd];
-	lenro = lenro + lenrd;
+        [g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
+        [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+        g = [g; gr];
 	leng = length(g); 
 	if (leng>LEN)
              NINTlo = curNINT;
@@ -114,7 +109,8 @@ end
 
   nint = NINThi;
   [g,k,lenro] = gencone(RES,FOV,nint,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-  [grd, krd, lenrd] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-  g = [g; grd];
-  k = [k; krd];
-  lenro = lenro + lenrd;
+  [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+  g = [g; gr];
+  k = [k; kr];
+  lenro = lenro + lenr;
+
