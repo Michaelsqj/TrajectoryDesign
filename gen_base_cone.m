@@ -44,6 +44,8 @@ function [time, g, k] = gen_base_cone(mat, fov, Ts, gmax, smax, readout_time, co
             [time, g, k] = base_cone7(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
         case 8
             [time, g, k] = base_cone8(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
+        case 9
+            [time, g, k] = base_cone9(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
         otherwise
             warning('unexpected cone type, cone type should be within 1~4')
     end

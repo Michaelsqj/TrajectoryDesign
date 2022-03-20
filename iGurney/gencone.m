@@ -107,12 +107,23 @@ str = sprintf('wcc(%g,[%g %g],%g,%g,%g,%g,%g,[%g %g],[%g %g],%g,[%g %g]);\n',pi/
 
 
 
-[g,k,len] = wcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD);
+% [g,k,len] = wcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD);
 % rho_len = 1000;
 % % rho = 1 - 0.3 * tanh(linspace(-1,1,rho_len));
 % rho = ones(1000,1); 
 % [g,k,len] = vdwcc(pi/2-THETArange,[FOVcirc FOVrad],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD, rho, rho_len);
-
+% wcc_vd(theta, [FOVcircs, FOVrads, krs], DCF, kmaxrange, nint, numpt, Ts, [SMAX*TS*xyscale SMAX*TS*zscale], [GMAX*xyscale GMAX*zscale],MINDENS*densadjust, apod)
+kr = linspace(0,1,1001).*KMAXrange;
+rho=ones(size(kr));
+% k1 = 0.75 / 5 * KMAXrange;
+% k1pt = ceil(k1 / KMAXrange * length(kr) );
+% f1=1;
+% f2=0.5;
+% p=3;
+% rho(1:k1pt)=1;
+% rho(k1pt+1:end) = (f1-f2) * (1 - (kr(k1pt+1:end)-k1)/(KMAXrange-k1)).^p+f2;
+% fprintf("wcc_vd\n");
+[g,k,len] = wcc_vd(pi/2-THETArange,[FOVcirc.*rho FOVrad.*rho, kr],DCF,KMAXrange,NINT,MAXLEN*OVERSAMPLE,TS,[SMAX*TS*xyscale SMAX*TS*zscale],[GMAX*xyscale GMAX*zscale],MINDENS*densadjust,APOD);
 
 
 

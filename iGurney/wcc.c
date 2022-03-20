@@ -734,7 +734,7 @@ int whirlcone(double theta,
    double dorungekutta;
    double nosmooth;
    nosmooth = 0; /*tohere*/
-   dorungekutta = 0;
+   dorungekutta = 1;
 
    pkr = mxCalloc((numptx), sizeof(double));
    pcsndk = mxCalloc((numptx), sizeof(double));

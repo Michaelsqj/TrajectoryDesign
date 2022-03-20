@@ -35,15 +35,15 @@ function [time, g, k] = base_cone3(mat, fov, Ts, gmax, smax, readout_time, cone_
 
     addpath('./iGurney');
     %---------------------------------
-%     theta = cone_angle;
+    theta = cone_angle;
 %     [g,k,nint,len] = findcone(res,fov,LEN,theta,0.01,Ts,1,smax,gmax,0, 0, [0,1], 0);
 %     time = length(g) * Ts;
 
     %---------------------------------
-    theta         = [0+1e-5 pi/2-1e-5];
+%     theta         = [0+1e-5 pi/2-1e-5];
     
-    DCF = 0;
-    [g_range,k_range,nint_range,lenro] = findcone(res,fov,LEN,theta,0.1,Ts,1,smax,gmax, DCF);
+    DCF = 0.5;
+    [g_range,k_range,nint_range,lenro] = findcone(res,fov,LEN,theta,0.01,Ts,1,smax,gmax, DCF);
 
     time = length(g_range) * Ts;
     

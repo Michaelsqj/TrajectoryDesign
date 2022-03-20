@@ -83,8 +83,8 @@ while ((leng>LEN))
 	curNINT = NINThi;
 	LENhi = leng;
         [g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-        [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-        g = [g; gr];
+%         [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+%         g = [g; gr];
 	leng = length(g); 
 end
 
@@ -93,8 +93,8 @@ end
 while ((((NINThi-NINTlo)>PRECISION) || (leng>LEN)) && (LENhi~=LEN))
 	curNINT = (NINThi-NINTlo)/2+NINTlo;
         [g,k,lenro] = gencone(RES,FOV,curNINT,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-        [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-        g = [g; gr];
+%         [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+%         g = [g; gr];
 	leng = length(g); 
 	if (leng>LEN)
              NINTlo = curNINT;
@@ -109,8 +109,8 @@ end
 
   nint = NINThi;
   [g,k,lenro] = gencone(RES,FOV,nint,THETA,MAXLEN,TS,SMAX,GMAX,OS,DCF,MINDENS,APOD,REW);
-  [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
-  g = [g; gr];
-  k = [k; kr];
-  lenro = lenro + lenr;
+%   [gr, kr, lenr] = minRampDown(g(end,:), k(end,:), SMAX, TS);
+%   g = [g; gr];
+%   k = [k; kr];
+%   lenro = lenro + lenr;
 

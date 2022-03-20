@@ -21,13 +21,13 @@ smax    = 12.307;                       % G/cm/ms
 T       = 10e-3;                        % gradient raster time, ms
 
 % Design Parameters
-bwpixel = 399;                      %Hz, bandwidth per pixel
+bwpixel = 100;                      %Hz, bandwidth per pixel
 mat     = size(img,1) * 3;              % matrix size
 fov     = 200;                      % mm
 res     = fov / mat;                % mm
 kmax    = 5 / res;                  % [1/cm]
 
-OS      = 2;                        % oversampling factor
+OS      = 4;                        % oversampling factor
 bw_readout      = bwpixel * mat;                  % Hz
 Ts              = 1e3 / bw_readout / OS;               % ms, ADC sampling time
 LEN             = mat * OS;
@@ -43,14 +43,14 @@ under_factor    = 50;               % undersampling factor
 
 ileaves         = 2 * ceil(mat^2*pi/2/under_factor);                   % Number of interleaves
 num_gold_recon  = ileaves;            % number of interleaves used in golden angle recon
-cone_area       = 4 * pi / num_gold_recon;              % changeable
+cone_area       = 4 * pi / (num_gold_recon/2);              % changeable
 cone_angle      = min( angle_factor * acosd( 1 - cone_area / 2 / pi ), 20)
 
 fid = fopen('./logs/main_perf.txt','w');
 fprintf(fid, '\n\n\n\n\n%s \n\n',datestr(now, 'dd/mm/yy-HH:MM') );
 fprintf(fid, '\n%s\n\n',fname);
 
-for cone_type = [3]
+for cone_type = [6]
 
     basename = [outdir, '/',char(cone_types(cone_type)),'_',num2str(mat), '_', num2str(num_gold_recon), '_', num2str(angle_factor),'Xangle_', num2str(under_factor),'X', num2str(OS),'OS-']
 
@@ -80,10 +80,10 @@ for cone_type = [3]
 
     %----------------------------------------------------
     %   recon PSF
-    Epsf = xfm_init(mat, k_traj_perf ./ kmax .*pi);
-    PSF = reshape(Epsf' * ones(size(k_traj_perf, 1), 1), [mat, mat, mat]);
-    [fwhm] = calc_fwhm(abs(PSF));
-    sidelobe_level = calc_sidelobe(abs(PSF));
+%     Epsf = xfm_init(mat, k_traj_perf ./ kmax .*pi);
+%     PSF = reshape(Epsf' * ones(size(k_traj_perf, 1), 1), [mat, mat, mat]);
+%     [fwhm] = calc_fwhm(abs(PSF));
+%     sidelobe_level = calc_sidelobe(abs(PSF));
     
     clear Epsf
     %-----------------------------------

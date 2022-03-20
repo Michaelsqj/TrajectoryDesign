@@ -1,6 +1,6 @@
 function noise_recons = add_noise(E, img)
 
-    reptime = 30;
+    reptime = 15;
     snr = 5;
     
     imgk = E * img(:);
