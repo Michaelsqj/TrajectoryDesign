@@ -1,8 +1,10 @@
-function noise_recons = add_noise(E, img)
+function noise_recons = add_noise(E, img, snr)
+    if nargin<3
+        snr = 5;
+    end
 
     reptime = 15;
-    snr = 5;
-    
+
     imgk = E * img(:);
     Pimgk = sum(imgk.^2, 'all') ./ length(imgk(:));
     Pnoi = Pimgk * 10^(-snr/10);

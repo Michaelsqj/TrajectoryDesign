@@ -7,11 +7,11 @@
 #define mxCalloc calloc
 #endif
 
-#ifdef CONES_LEGACY
-#include "wcc.h"
-#else
-#include "wcc_vd.h"
-#endif
+// #ifdef CONES_LEGACY
+// #include "wcc.h"
+// #else
+// #include "wcc_vd.h"
+// #endif
 
 #ifndef PI
 #define PI 3.14159265358979f
