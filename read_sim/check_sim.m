@@ -1,11 +1,11 @@
 %% load moments/ gradient from simulation
-Nsegs   = 3;
-Nshots  = 2;
-NPhases = 1;
+Nsegs   = 24;
+Nshots  = 5;
+NPhases = 3;
 Navgs   = 2;
 
-fpath = "/Users/qijia/Documents/VirtualBoxVms/shared/";
-sim_name = "2022_03_24_01_32_19";
+fpath = "./";
+sim_name = "2022_06_16_11_11_35";
 
 ADC = uncompress(fpath, sim_name, "ADC");
 ADC = ADC(1:10:end);
@@ -25,11 +25,11 @@ Gz  = reshape(Gz, [], Nsegs, NPhases, Navgs, Nshots) / 10;
 
 %% load gradient from text file
 addpath('../')
-gradname = "gurney_grad_128_200_4970";
+gradname = "newjohnson_grad_176_200_9920";
 
-bwpixel         = 199;
+bwpixel         = 100;
 OS              = 8;
-mat             = 128;
+mat             = 176;
 bw_readout      = bwpixel * mat;                  % Hz
 Ts              = 1e3 / bw_readout / OS;               % ms, ADC sampling time
 dead_ADC_pts    = 10;
@@ -49,9 +49,9 @@ base_k(:,3) = cumtrapz(squeeze(base_g(:,3))) .* 4.258 .* T;
 [R, GrRad] = calc_grmat(Nsegs, NPhases, Nshots, 1);
 R   = reshape(R, Nsegs, NPhases, Nshots, 3, 3);
 %% rotate the gradient/ trajectoryNsegs   = 3;
-seg     = 2;
-phase   = 1;
-shot    = 2;
+seg     = 23;
+phase   = 2;
+shot    = 1;
 
 rot_g = (squeeze(R(seg, phase, shot, :, :)) * base_g')'; 
 rot_k = (squeeze(R(seg, phase, shot, :, :)) * base_k')'; 

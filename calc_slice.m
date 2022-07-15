@@ -36,8 +36,10 @@ function [GrPRS, GsPRS, GrRad, GsRad, R] = calc_slice(GrPRS, theta)
         [GsRad(ii,:)] = inPlaneRot(GsRad(ii,:), GrRad(ii,:), theta(ii));
         
         R(ii, :, 2) = [GrRad(ii,1); -GrRad(ii,2); -GrRad(ii,3)];
-        [dSliceNormalSag, dSliceNormalCor, dSliceNormalTra] = checkNormVec(GsRad(ii,1), GsRad(ii,2), GsRad(ii,3));
-        R(ii, :, 3) = [dSliceNormalSag; -dSliceNormalCor;  -dSliceNormalTra];
+%         [dSliceNormalSag, dSliceNormalCor, dSliceNormalTra] = checkNormVec(GsRad(ii,1), GsRad(ii,2), GsRad(ii,3));
+        % [GsRad(ii,1), GsRad(ii,2), GsRad(ii,3)] = checkNormVec(GsRad(ii,1), GsRad(ii,2), GsRad(ii,3));
+        R(ii, :, 3) = [GsRad(ii,1), -GsRad(ii,2), -GsRad(ii,3)];
+%         R(ii, :, 3) = [dSliceNormalSag; -dSliceNormalCor;  -dSliceNormalTra];
         R(ii, :, 1) = cross(R(ii, :, 2), R(ii, :, 3));
     end
 end

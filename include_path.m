@@ -7,5 +7,7 @@ function include_path()
         addpath('/home/fs0/qijia/MATLAB/minTimeGradient/mex-interface')
         addpath('/home/fs0/qijia/MATLAB/encoding_transforms')
         addpath('/opt/fmrib/fsl/etc/matlab')
+        addpath('../MChiewCAPRIARecon/')
+        addpath('/home/fs0/qijia/code/SimTraj/radial-cones-orig/Generation')
     end
 end

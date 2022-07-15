@@ -31,7 +31,7 @@
 %     % figure; scatter((0:size(k,1)-1).*T2,k'); legend('kx','ky','kz'); hold on; scatter((0:size(kA,1)-1).*Ts,kA','x');
 % end
 
-function [gA, kA] = calc_ADCpts(g, k, T, Ts, LEN)
+function [gA, kA] = calc_ADCpts(g, k, T, Ts, LEN, grad_delay)
     %-----------------------------------------
     % linear interpolate the gradient raster points to generate ADC sampling points
     % Inputs:
@@ -39,9 +39,12 @@ function [gA, kA] = calc_ADCpts(g, k, T, Ts, LEN)
     %   T: gradient raster time, (ms)
     %   Ts: ADC sampling points, (ms)
     %   LEN: readout length
+    if nargin<6
+        grad_delay = 0;
+    end
     gamma = 42.58e2;   % Hz/G
     N = size(g, 1);
-    grad_points = (0: (N-1)) .* T;
+    grad_points = (0: (N-1)) .* T + grad_delay;
     read_points = (0: (LEN-1)) .* Ts;
     gA(:,1) = interp1(grad_points, g(:,1), read_points, 'linear', 'extrap');
     gA(:,2) = interp1(grad_points, g(:,2), read_points, 'linear', 'extrap');

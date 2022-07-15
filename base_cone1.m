@@ -74,6 +74,18 @@ function [optTime, optgA, optkA, optp, optA, optArclength, undersample] = base_c
         end
 
     end
+        
+    kmax_rad = kmax * cos(cone_angle / 180 * pi);
+    k(:, 3) = t * kmax_rad;
+
+    kTr = t.^3 * kmax * sin(cone_angle / 180 * pi);
+    phi = 2 * pi * optA * t.^optp;
+    k(:, 1) = cos(phi) .* kTr;
+    k(:, 2) = sin(phi) .* kTr;
+
+    [C, time, gA, s, kA, phi, sta, stb] = minTimeGradient(k, 0, 0, 0, gmax, smax, Ts);
+
+    rtime = max(time);
     
     undersample = optArclength / kmax;
     disp('-----------------------');

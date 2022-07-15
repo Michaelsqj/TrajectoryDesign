@@ -46,6 +46,10 @@ function [time, g, k] = gen_base_cone(mat, fov, Ts, gmax, smax, readout_time, co
             [time, g, k] = base_cone8(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
         case 9
             [time, g, k] = base_cone9(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
+        case 10
+            [time, g, k] = base_cone10(mat, fov, Ts, gmax, smax, readout_time, cone_angle);
+            % generate radial spokes with equal readout length
+%             [time, g, k] = gen_radial(mat, fov, smax, gmax, floor(readout_time/Ts), Ts, 1);
         otherwise
             warning('unexpected cone type, cone type should be within 1~4')
     end

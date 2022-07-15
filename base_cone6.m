@@ -63,7 +63,11 @@ function k = genkT(fact, p, kmax, cone_angle)
     t1 = t(1:500);
     t2 = t(501:end);
     kmax_rad = kmax * cos(cone_angle / 180 * pi);
-    k(:, 3) = t.^1.0 * kmax_rad;
+    k(:, 3) = t.^1 * kmax_rad;
+
+    % kTr1 = t1 * 0;
+    % kTr2 = (t2 - t2(1)) / t2(end) * kmax * sin(cone_angle / 180 * pi);
+
 
     kTr2 = t2.^3 * kmax * sin(cone_angle / 180 * pi);
 

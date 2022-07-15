@@ -4,7 +4,7 @@ clc
 fpath = "./";
 % "ig_36x6_100hz" "radial_36x6_100hz" "rot_rad_36x6_100hz"
 % "half_rad_36x6_100hz"
-sim_name = "2022_03_13_09_01_00";
+sim_name = "2022_06_15_03_25_44";
 
 % [ dsvStruct ] = dsv_readFolder( ['/Users/michael/Documents/VirtualBoxVMs/IDEAshared/sim/', sim_name] );
 % XG = dsvStruct.GX; YG = dsvStruct.GY; ZG =  dsvStruct.GZ; ADC = dsvStruct.ADC; 
@@ -15,26 +15,26 @@ XG  = uncompress(fpath, sim_name, "GRX");
 YG  = uncompress(fpath, sim_name, "GRY");
 ZG  = uncompress(fpath, sim_name, "GRZ");
 
-sim_name = "2022_03_13_09_06_36";
-ADC2 = uncompress(fpath, sim_name, "ADC");
-ADC2 = ADC2(1:10:end);
-XG2  = uncompress(fpath, sim_name, "GRX");
-YG2  = uncompress(fpath, sim_name, "GRY");
-ZG2  = uncompress(fpath, sim_name, "GRZ");
+% sim_name = "2022_03_13_09_06_36";
+% ADC2 = uncompress(fpath, sim_name, "ADC");
+% ADC2 = ADC2(1:10:end);
+% XG2  = uncompress(fpath, sim_name, "GRX");
+% YG2  = uncompress(fpath, sim_name, "GRY");
+% ZG2  = uncompress(fpath, sim_name, "GRZ");
 
 
-draw_time_graph(XG-XG2, YG-YG2, ZG-ZG2, ADC);
+% draw_time_graph(XG-XG2, YG-YG2, ZG-ZG2, ADC);
 
-% len = min(length(ZG), length(ADC));
-% ADC = ADC(1:len); XG=XG(1:len); YG=YG(1:len); ZG=ZG(1:len);
-% pts = (ADC==1); Gr = XG(pts); Gp = YG(pts); Gs=ZG(pts);
-% 
-% grad = [Gr(:), Gp(:), Gs(:)];
-% size(grad)
-% 
-% fid = fopen(sim_name+"_grad", 'w');
-% fprintf(fid,'%f\t%f\t%f\n',grad'); 
-% fclose(fid);
+len = min(length(ZG), length(ADC));
+ADC = ADC(1:len); XG=XG(1:len); YG=YG(1:len); ZG=ZG(1:len);
+pts = (ADC==1); Gr = XG(pts); Gp = YG(pts); Gs=ZG(pts);
+
+grad = [Gr(:), Gp(:), Gs(:)];
+size(grad)
+
+fid = fopen(sim_name+"_grad", 'w');
+fprintf(fid,'%f\t%f\t%f\n',grad'); 
+fclose(fid);
 
 function XG = uncompress(fpath, sim_name, tail)
     vf_txt = split(regexp(fileread(fpath+sim_name+"/SimulationProtocol_" + tail + ".dsv"),"[^\n]*VERTFACTOR[^\r]*","match"),"=");

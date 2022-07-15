@@ -6,6 +6,7 @@ function noise_recons = add_noise(E, img, snr)
     reptime = 15;
 
     imgk = E * img(:);
+    imgk = imgk./E.w(:,1);
     Pimgk = sum(imgk.^2, 'all') ./ length(imgk(:));
     Pnoi = Pimgk * 10^(-snr/10);
     sigma = sqrt(Pnoi);

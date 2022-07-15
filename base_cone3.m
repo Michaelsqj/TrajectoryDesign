@@ -42,7 +42,7 @@ function [time, g, k] = base_cone3(mat, fov, Ts, gmax, smax, readout_time, cone_
     %---------------------------------
 %     theta         = [0+1e-5 pi/2-1e-5];
     
-    DCF = 0.5;
+    DCF = 0;
     [g_range,k_range,nint_range,lenro] = findcone(res,fov,LEN,theta,0.01,Ts,1,smax,gmax, DCF);
 
     time = length(g_range) * Ts;
